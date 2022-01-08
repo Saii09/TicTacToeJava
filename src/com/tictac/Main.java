@@ -1,9 +1,19 @@
 package com.tictac;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+import java.io.IOException;
+import static com.tictac.clearScreen.clrscr;
+import javax.sound.sampled.*;
+import javax.sound.sampled.TargetDataLine;
+import javax.swing.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.*;
+import java.lang.ClassNotFoundException;
 
 public class Main {
 
@@ -64,7 +74,7 @@ public class Main {
                 pl = p2;
             }
             System.out.println(
-                    pl + "'s turn. enter a slot number to place "
+                    pl + "'s turn. enter a slot number between 1-9 to place "
                             + turn + " in:");
             return null;
         }
@@ -83,12 +93,13 @@ public class Main {
         }
 
         static void setBoard () {
+           // printBoard();
             for (int a = 0; a < 9; a++) {
                 board[a] = String.valueOf(a + 1);
             }
         }
 
-        public static void main (String[]args){
+        public static void main (String[]args) throws ClassNotFoundException, UnsupportedAudioFileException,IOException,LineUnavailableException {
             turn = "X";
             pl = p1;
             int ch = 1;
@@ -96,11 +107,16 @@ public class Main {
             Scanner in = new Scanner(System.in);
             Scanner win = new Scanner(System.in);
             board = new String[9];
-
             String winner = null;
 
+            clearScreen c= new clearScreen();
+            c.clrscr();
             setBoard();
-            System.out.println("Welcome to 3x3 Tic Tac Toe.");
+            Scanner scanner = new Scanner(System.in);
+            com.tictac.audio a = new com.tictac.audio();
+            a.playAudio("C:\\Users\\sanjana\\Downloads\\sci-fi-voiceclip-961-sound-effect-33605958.wav");
+
+            System.out.println("Welcome to world famous Tic Tac Toe.");
             printBoard();
             System.out.println("Enter the name of Player 1: ");
             Scanner s = new Scanner(System.in);
@@ -123,7 +139,7 @@ public class Main {
                 }
                 printBoard();
                 System.out.println(
-                        pl + " will play first. Enter a slot number to place " + turn + " in:");
+                        pl + " will play first. Enter a slot number between 1-9 to place " + turn + " in:");
                 winner = null;
                 while (winner == null) {
                     int numInput;
@@ -131,12 +147,12 @@ public class Main {
                         numInput = in.nextInt();
                         if (!(numInput > 0 && numInput <= 9)) {
                             System.out.println(
-                                    "Invalid input; re-enter slot number:");
+                                    "Invalid input. Please re-enter a slot between 1-9");
                             break;
                         }
                     } catch (InputMismatchException e) {
                         System.out.println(
-                                "Invalid input; re-enter slot number:");
+                                "Invalid input. Please re-enter slot number between 1-9:");
                         break;
                     }
 
@@ -171,6 +187,7 @@ public class Main {
                         y++;
                         winner = p2;
                     }
+                    a.playAudio("C:\\Users\\sanjana\\OneDrive\\Desktop\\2PBE8A4-huge-win.wav");
                     System.out.println(
                             "Congratulations! " + winner
                                     + " has won! Thanks for playing.");
@@ -178,10 +195,16 @@ public class Main {
                 round++;
                 System.out.println("Press 1 to keep Enjoying");
                 ch = win.nextInt();
-                clearScreen c = new clearScreen();
-                c.clrscr();
-                setBoard();
-
+                if (ch == 1) {
+                   //com.tictac.clearScreen c = new com.tictac.clearScreen
+                    clearScreen cs=new clearScreen();
+                    cs.clrscr();
+                   setBoard();
+        } else{
+                    System.exit(0);
+        }
+                /*clearScreen c = new clearScreen();
+                c.clrscr();*/
             }
         }
     }
