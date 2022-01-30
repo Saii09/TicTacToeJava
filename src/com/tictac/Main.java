@@ -123,6 +123,7 @@ public class Main {
             String p1 = s.next();
             System.out.println("Enter the name of Player 2: ");
             String p2 = s.next();
+            clrscr();
             while (ch == 1) {
                 System.out.println(p1 + " vs " + p2);
                 while (round > 0) {
@@ -137,6 +138,8 @@ public class Main {
                     turn = "S";
                     pl = p2;
                 }
+
+
                 printBoard();
                 System.out.println(
                         pl + " will play first. Enter a slot number between 1-9 to place " + turn + " in:");
@@ -165,7 +168,7 @@ public class Main {
                         } else {
                             turn = "X";
                         }
-
+                        clrscr();
                         printBoard();
                         winner = checkWinner(p1, p2);
                     } else {
@@ -201,6 +204,7 @@ public class Main {
                     cs.clrscr();
                    setBoard();
         } else{
+                    System.out.println("Thank you for playing. Come back soon!!");
                     System.exit(0);
         }
                 /*clearScreen c = new clearScreen();
