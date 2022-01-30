@@ -190,7 +190,7 @@ public class Main {
                         y++;
                         winner = p2;
                     }
-                    a.playAudio("C:\\Users\\sanjana\\OneDrive\\Desktop\\2PBE8A4-huge-win.wav");
+                    a.playAudio("C:\\Users\\sanjana\\Downloads\\2PBE8A4-huge-win.wav");
                     System.out.println(
                             "Congratulations! " + winner
                                     + " has won! Thanks for playing.");
